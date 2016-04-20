@@ -16,7 +16,7 @@ A Debuggable, Self-Installing Windows Service Template based on [James Michael H
 
 ## More ##
 
-The `WindowsService.cs` file contains the `ServiceImplementation` class whichs, as it's name suggests, implements all service methods. This class has been fitted with an `WindowsService` attribute which you can use to control some service-properties like `Name`, `DisplayName`, `Description`, `UserName`, `Password`, `EventLogSource`, `StartMode`, `CanPauseAndContinue`, `CanShutdown`, `CanStop` and services your service depends on via `ServiceDependsOn`.
+The `WindowsService.cs` file contains the `ServiceImplementation` class which, as it's name suggests, implements all service methods. This class has been fitted with an `WindowsServiceAttribute` which you can use to control some service-specific properties like `Name`, `DisplayName`, `Description`, `UserName`, `Password`, `EventLogSource`, `StartMode`, `CanPauseAndContinue`, `CanShutdown`, `CanStop` and services your service depends on via `ServiceDependsOn`.
 
 ## But I want more! ##
 
