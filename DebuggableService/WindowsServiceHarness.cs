@@ -6,7 +6,7 @@ namespace $safeprojectname$.Framework
 {
 	/// <summary>
 	/// A generic Windows Service that can handle any assembly that
-	/// implements IWindowsService (including AbstractWindowsService) 
+	/// implements IWindowsService (including AbstractWindowsService)
 	/// </summary>
 	public partial class WindowsServiceHarness : ServiceBase
 	{
@@ -40,7 +40,7 @@ namespace $safeprojectname$.Framework
 		/// </summary>
 		protected override void OnContinue()
 		{
-			// perform class specific behavior 
+			// perform class specific behavior
 			ServiceImplementation.OnContinue();
 		}
 
@@ -49,7 +49,7 @@ namespace $safeprojectname$.Framework
 		/// </summary>
 		protected override void OnPause()
 		{
-			// perform class specific behavior 
+			// perform class specific behavior
 			ServiceImplementation.OnPause();
 		}
 
@@ -59,7 +59,7 @@ namespace $safeprojectname$.Framework
 		/// <param name="command">Id of custom command</param>
 		protected override void OnCustomCommand(int command)
 		{
-			// perform class specific behavior 
+			// perform class specific behavior
 			ServiceImplementation.OnCustomCommand(command);
 		}
 
@@ -78,8 +78,12 @@ namespace $safeprojectname$.Framework
 		/// <param name="args">The startup arguments array.</param>
 		protected override void OnStart(string[] args)
 		{
-			ServiceImplementation.OnStart(args);
-		}
+            if (!ServiceImplementation.OnStart(args, this.EventLog))
+            {
+                this.ExitCode = 1064;
+                this.Stop();
+            }
+        }
 
 		/// <summary>
 		/// Called when service is requested to stop
@@ -116,7 +120,7 @@ namespace $safeprojectname$.Framework
 				// we don't handle: Term Services session event
 				CanHandleSessionChangeEvent = false;
 
-				// always auto-event-log 
+				// always auto-event-log
 				AutoLog = true;
 			}
 			else

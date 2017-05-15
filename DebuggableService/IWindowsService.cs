@@ -8,25 +8,27 @@ namespace $safeprojectname$.Framework
 	/// </summary>
 	public interface IWindowsService : IDisposable
 	{
-		/// <summary>
-		/// This method is called when the service gets a request to start.
-		/// </summary>
-		/// <param name="args">Any command line arguments</param>
-		void OnStart(string[] args);
+        /// <summary>
+        /// This method is called when the service gets a request to start.
+        /// </summary>
+        /// <param name="args">Any command line arguments</param>
+        /// <param name="eventLog">Reference to the evnt logging mechanism</param>
+
+        bool OnStart(string[] args, $safeprojectname$.Types.EventLog eventLog);
+
+        /// <summary>
+        /// This method is called when the service gets a request to stop.
+        /// </summary>
+        void OnStop();
 
 		/// <summary>
-		/// This method is called when the service gets a request to stop.
-		/// </summary>
-		void OnStop();
-
-		/// <summary>
-		/// This method is called when a service gets a request to pause, 
+		/// This method is called when a service gets a request to pause,
 		/// but not stop completely.
 		/// </summary>
 		void OnPause();
 
 		/// <summary>
-		/// This method is called when a service gets a request to resume 
+		/// This method is called when a service gets a request to resume
 		/// after a pause is issued.
 		/// </summary>
 		void OnContinue();
