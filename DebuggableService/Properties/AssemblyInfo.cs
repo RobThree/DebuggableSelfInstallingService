@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DebuggableService")]
-[assembly: AssemblyCopyright("Copyright © RobIII 2016")]
+[assembly: AssemblyCopyright("Copyright © RobIII 2016 - 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

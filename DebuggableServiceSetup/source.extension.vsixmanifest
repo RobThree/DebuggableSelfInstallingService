@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="DebuggableServiceSetup.RobIII.2a3cb545-4403-43b8-8482-71295557dbf5" Version="1.1" Language="en-US" Publisher="RobIII" />
+        <Identity Id="DebuggableServiceSetup.RobIII.2a3cb545-4403-43b8-8482-71295557dbf5" Version="1.2" Language="en-US" Publisher="RobIII" />
         <DisplayName>DebuggableService</DisplayName>
         <Description xml:space="preserve">A Windows Service project template that is easier to run and debug than the default Windows Service project template</Description>
         <MoreInfo>https://github.com/RobThree/DebuggableSelfInstallingService</MoreInfo>

@@ -27,5 +27,6 @@ Sure! No problem. I can recommend the excellent [Topshelf](http://topshelf-proje
 Works (tested) with:
 * Visual Studio 2013
 * Visual Studio 2015
+* Visual Studio 2017
 
 ![Project status](http://riii.nl/womm)
