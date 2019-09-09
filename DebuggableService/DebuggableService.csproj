@@ -75,6 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcessingTasks.cs" />
+    <Compile Include="ServiceActions.cs" />
+    <Compile Include="WorkerProcess.cs" />
     <None Include="ConsoleHarness.cs" />
     <None Include="IWindowsService.cs" />
     <None Include="TypeExtensions.cs" />
@@ -88,6 +91,9 @@
       <DependentUpon>WindowsServiceInstaller.cs</DependentUpon>
     </None>
     <None Include="Program.cs" />
+    <Compile Include="EventLog.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="ServiceImplementation.cs" />
   </ItemGroup>

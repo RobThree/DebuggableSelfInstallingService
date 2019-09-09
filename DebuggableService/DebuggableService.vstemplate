@@ -25,6 +25,10 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Framework\WindowsServiceHarness.Designer.cs">WindowsServiceHarness.Designer.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Framework\WindowsServiceInstaller.cs">WindowsServiceInstaller.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Framework\WindowsServiceInstaller.Designer.cs">WindowsServiceInstaller.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Types\EventLog.cs">EventLog.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="ServiceActions\ServiceActions.cs">ServiceActions.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Processing\ProcessingTasks.cs">ProcessingTasks.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Processing\WorkerProcess.cs">WorkerProcess.cs</ProjectItem>
     </Project>
   </TemplateContent>
 </VSTemplate>

@@ -1,66 +1,73 @@
 ﻿using System;
+using $safeprojectname$.Types;
 
 namespace $safeprojectname$.Framework
 {
-	public static class ConsoleHarness
+	internal static class ConsoleHarness
 	{
-		// Run a service from the console given a service implementation
-		public static void Run(string[] args, IWindowsService service)
+        private static bool shutdown = false;
+
+        // Run a service from the console given a service implementation
+        internal static void Run(string[] args, IWindowsService service)
 		{
-			string serviceName = service.GetType().Name;
-			bool isRunning = true;
+            string serviceName = service.GetType().Name;
+            bool isRunning = true;
 
-			// simulate starting the windows service
-			service.OnStart(args);
+            // simulate starting the windows service
+            // bypass the system event call via ServiceBase and go straight to our handler
+            if (service.OnStart(args, new EventLog(true)))
+            {
+                // let it run as long as Q is not pressed
+                while (isRunning)
+                {
+                    WriteToConsole(ConsoleColor.Yellow, "\nEnter either [P]ause, [R]esume, [Q]uit (stop), [S]hutdown: ");
+                    isRunning = HandleConsoleInput(service, WaitForKey(false));
+                }
 
-			// let it run as long as Q is not pressed
-			while (isRunning)
-			{
-				WriteToConsole(ConsoleColor.Yellow, "Enter either [Q]uit, [P]ause, [R]esume : ");
-				isRunning = HandleConsoleInput(service, Console.ReadLine());
-			}
+                if (shutdown)
+                    service.OnShutdown();
+                else
+                    service.OnStop();
+            }
 
-			// stop and shutdown
-			service.OnStop();
-			service.OnShutdown();
-		}
-
+            WaitForKey(true);
+        }
 
 		// Private input handler for console commands.
-		private static bool HandleConsoleInput(IWindowsService service, string line)
+		private static bool HandleConsoleInput(IWindowsService service, ConsoleKeyInfo key)
 		{
 			bool canContinue = true;
 
-			// check input
-			if (line != null)
-			{
-				switch (line.ToUpper())
-				{
-					case "Q":
-						canContinue = false;
-						break;
+            // check input
+            switch (key.Key.ToString())
+            {
+                case "Q":
+                    canContinue = false;
+                    break;
 
-					case "P":
-						service.OnPause();
-						break;
+                case "P":
+                    service.OnPause();
+                    break;
 
-					case "R":
-						service.OnContinue();
-						break;
+                case "R":
+                    service.OnContinue();
+                    break;
 
-					default:
-						WriteToConsole(ConsoleColor.Red, "Did not understand that input, try again.");
-						break;
-				}
-			}
+                case "S":
+                    canContinue = false;
+                    shutdown = true;
+                    break;
 
-			return canContinue;
+                default:
+                    WriteToConsole(ConsoleColor.Red, "\nDid not understand that input, try again.");
+                    break;
+            }
+
+            return canContinue;
 		}
 
-
 		// Helper method to write a message to the console at the given foreground color.
-		internal static void WriteToConsole(ConsoleColor foregroundColor, string format,
-			params object[] formatArguments)
+		internal static void WriteToConsole(ConsoleColor foregroundColor, string format, params object[] formatArguments)
 		{
 			ConsoleColor originalColor = Console.ForegroundColor;
 			Console.ForegroundColor = foregroundColor;
@@ -70,5 +77,11 @@ namespace $safeprojectname$.Framework
 
 			Console.ForegroundColor = originalColor;
 		}
-	}
+
+        internal static ConsoleKeyInfo WaitForKey(bool promptExit)
+        {
+            if (promptExit) WriteToConsole(ConsoleColor.Gray, "\n\nPress any key to exit\n");
+            return Console.ReadKey(true);
+        }
+    }
 }
